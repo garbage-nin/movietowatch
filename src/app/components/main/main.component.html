@@ -1,10 +1,14 @@
 <div class="p-2 h-full w-full bg-sky-950">
-  <div class="text-center pb-2">
+  <div class="text-center pb-4">
     <div>
       <span class="p-4 text-5xl text-sky-500 font-bolder">Movie Watchlist</span>
     </div>
   </div>
 
-  <app-navigation></app-navigation>
+  <app-navigation (showModal)="displayModal($event)"></app-navigation>
   <main class="py-2"></main>
+  <app-add-modal
+    *ngIf="isModalVisible"
+    (closeModal)="displayModal($event)"
+  ></app-add-modal>
 </div>

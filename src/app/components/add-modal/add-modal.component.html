@@ -1,0 +1,86 @@
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div
+    class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+  ></div>
+  <mat-card
+    class="w-fit mx-auto !rounded-lg !bg-sky-700 !border-2 !border-sky-400 text-white bottom-1/4 shadow-lg z-50"
+  >
+    <mat-card-header>
+      <mat-card-title>New movie details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="px-4 pt-2">
+        <div [formGroup]="movieForm" class="flex flex-row space-x-6 py-2">
+          <div class="flex flex-col form-fields">
+            <mat-form-field>
+              <mat-label>Movie Title</mat-label>
+              <input
+                matInput
+                placeholder="title"
+                formControlName="title"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Actors</mat-label>
+              <input
+                matInput
+                placeholder="James Smith"
+                formControlName="actor"
+                required
+              /> </mat-form-field
+            ><mat-form-field>
+              <mat-label>Release date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="releaseDate"
+                placeholder="mm/dd/yyyy"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col form-fields">
+            <mat-form-field>
+              <mat-label>Genre</mat-label>
+              <mat-select formControlName="genre" multiple>
+                <mat-option *ngFor="let genre of genreList" [value]="genre">{{
+                  genre
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Views</mat-label>
+              <input
+                matInput
+                placeholder="0"
+                formControlName="views"
+                type="number"
+              />
+            </mat-form-field>
+            <div class="pt-3 flex items-center">
+              <mat-label class="pr-2">Rating: </mat-label>
+              <ng-container *ngFor="let star of stars; let i = index">
+                <mat-icon
+                  fontIcon="star"
+                  class="!mx-1"
+                  (click)="selectedRating = i"
+                  [ngClass]="{ 'text-yellow-500': selectedRating >= i }"
+                ></mat-icon>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="closeModal.emit(false)">Close</button>
+      <button mat-button (click)="addNewMovie()">Add</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
