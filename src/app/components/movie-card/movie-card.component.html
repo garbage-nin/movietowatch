@@ -1,0 +1,167 @@
+<mat-card
+  [formGroup]="movieForm"
+  class="!rounded-lg !border-4 !border-sky-500 example-card"
+>
+  <mat-card-header class="!block">
+    <mat-card-title>
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-gray-500">Title:</span>
+          <input
+            class="cursor-auto text-2xl bold !bg-transparent py-1"
+            type="text"
+            formControlName="title"
+            (dblclick)="enableInputField('title')"
+            (blur)="disableInputField('title')"
+          />
+        </div>
+        <div class="flex flex-row-reverse">
+          <mat-icon
+            (click)="clickPinnedIcon()"
+            class="text-xl text-gray-500 ml-2"
+            fontIcon="push_pin"
+            [ngClass]="{
+              'text-yellow-500': movieForm.get('pinned')!.value === true
+            }"
+          ></mat-icon>
+          <mat-icon
+            (click)="clickWatchIcon()"
+            class="text-xl text-gray-500 ml-2"
+            fontIcon="visibility"
+            [ngClass]="{
+              'text-yellow-500': movieForm.get('watched')!.value === true
+            }"
+          ></mat-icon>
+        </div>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div class="py-2 flex flex-row justify-between items-center">
+        <div class="flex flex-row justify-around items-center">
+          <ng-container *ngFor="let star of stars; let i = index">
+            <mat-icon
+              fontIcon="star"
+              class="!mx-1"
+              (dblclick)="selectedRating = i + 1"
+              [ngClass]="{ 'text-yellow-500': selectedRating > i }"
+            ></mat-icon>
+          </ng-container>
+        </div>
+        <div class="text-right">
+          <span>Views: </span>
+          <input
+            type="number"
+            formControlName="views"
+            class="w-4/12 text-right bg-transparent p-1"
+            (dblclick)="enableInputField('views')"
+            (blur)="disableInputField('views')"
+          />
+        </div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="getMovieImageUrl(movie.imageFilename)" />
+  <mat-card-content>
+    <div class="py-1 text-base font-bold">Movie Details</div>
+    <div class="py-2 flex flex-col">
+      <span>Actor: </span>
+      <div>
+        <input
+          type="text"
+          class="bg-transparent p-1 ml-5"
+          formControlName="actors"
+          (dblclick)="enableInputField('actors')"
+          (blur)="disableInputField('actors')"
+        />
+      </div>
+
+      <span>Release Date:</span>
+      <div class="flex items-center">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="releaseDate"
+          placeholder="mm/dd/yyyy"
+          class="bg-transparent p-1 ml-5"
+          (dblclick)="enableInputField('releaseDate')"
+          (blur)="disableInputField('releaseDate')"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+      <span>Genre: </span>
+      <div>
+        <mat-select
+          formControlName="genre"
+          class="bg-transparent p-1 ml-5 !w-11/12"
+          (dblclick)="enableInputField('genre')"
+          (blur)="disableInputField('genre')"
+          multiple
+        >
+          <mat-option *ngFor="let genre of genreList" [value]="genre">{{
+            genre
+          }}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="!flex !flex-row-reverse">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="confirmMessageDisplay()"
+      class="mx-2"
+    >
+      Edit
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-container *ngIf="confirmationMessage">
+  <div class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="absolute w-full h-full bg-gray-900 opacity-50 z-51"></div>
+    <div
+      class="bg-sky-700 border-2 border-sky-400 text-white p-4 rounded shadow-md w-2/6 z-50"
+    >
+      <p class="text-lg font-bold mb-4">Confirmation</p>
+      <p class="mb-4">Are you sure you want to proceed with your changes?</p>
+      <div class="py-2">
+        <div
+          class="grid grid-cols-3 border-b-white justify-items-center border-b-2 pb-2"
+        >
+          <span>Field</span>
+          <span>Old Value</span>
+          <span>New Value</span>
+        </div>
+        <ng-container *ngFor="let change of dataChanges">
+          <div class="grid grid-cols-3 py-1 justify-items-center">
+            <span>{{ change.key | titlecase }}</span>
+            <span>{{ change.oldValue }}</span>
+            <span>{{ change.newValue }}</span>
+          </div>
+        </ng-container>
+      </div>
+      <div class="py-2 flex justify-end">
+        <button
+          mat-raised-button
+          class="mx-2"
+          (click)="confirmationMessage = false"
+        >
+          Close
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          class="mx-2"
+          (click)="editMovie()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

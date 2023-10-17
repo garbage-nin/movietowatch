@@ -3,14 +3,14 @@
     class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
   ></div>
   <mat-card
-    class="w-fit mx-auto !rounded-lg !bg-sky-700 !border-2 !border-sky-400 text-white bottom-1/4 shadow-lg z-50"
+    class="w-fit px-2 mx-auto !rounded-lg !bg-sky-700 !border-2 !border-sky-400 text-white bottom-1/4 shadow-lg z-50"
   >
     <mat-card-header>
-      <mat-card-title>New movie details</mat-card-title>
+      <mat-card-title class="!text-3xl">New movie details</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="px-4 pt-2">
-        <div [formGroup]="movieForm" class="flex flex-row space-x-6 py-2">
+      <div [formGroup]="movieForm" class="px-4 pt-4">
+        <div class="flex flex-row space-x-6 py-2">
           <div class="flex flex-col form-fields">
             <mat-form-field>
               <mat-label>Movie Title</mat-label>
@@ -26,7 +26,7 @@
               <input
                 matInput
                 placeholder="James Smith"
-                formControlName="actor"
+                formControlName="actors"
                 required
               /> </mat-form-field
             ><mat-form-field>
@@ -76,11 +76,27 @@
             </div>
           </div>
         </div>
+
+        <input
+          type="file"
+          #fileInput
+          accept="image/*"
+          (change)="onImageSelect($event)"
+        />
       </div>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="closeModal.emit(false)">Close</button>
-      <button mat-button (click)="addNewMovie()">Add</button>
+    <mat-card-actions class="!flex !flex-row-reverse">
+      <button
+        mat-raised-button
+        color="accent"
+        class="mx-2"
+        (click)="addNewMovie()"
+      >
+        Add
+      </button>
+      <button mat-raised-button class="mx-2" (click)="closeModal.emit(false)">
+        Close
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

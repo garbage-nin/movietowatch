@@ -6,6 +6,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { AddModalComponent } from '../add-modal/add-modal.component';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,9 +17,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { CustomDatePipe } from 'src/app/pipe/custom-date.pipe';
 
 @NgModule({
-  declarations: [MainComponent, NavigationComponent, AddModalComponent],
+  declarations: [
+    MainComponent,
+    NavigationComponent,
+    AddModalComponent,
+    MovieCardComponent,
+    CustomDatePipe,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -32,6 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatSelectModule,
     MatNativeDateModule,
+    MatSnackBarModule,
   ],
 })
 export class MainModule {}

@@ -1,14 +1,25 @@
-<div class="p-2 h-full w-full bg-sky-950">
+<div class="p-2 w-full min-h-full bg-sky-950">
   <div class="text-center pb-4">
     <div>
       <span class="p-4 text-5xl text-sky-500 font-bolder">Movie Watchlist</span>
     </div>
   </div>
-
   <app-navigation (showModal)="displayModal($event)"></app-navigation>
-  <main class="py-2"></main>
+  <main class="py-2 h-auto">
+    <div class="flex flex-wrap">
+      <ng-container *ngFor="let movie of movie$ | async">
+        <div class="w-1/4 p-2">
+          <app-movie-card
+            [movie]="movie"
+            (afterEditEvent)="setToastMessage($event)"
+          ></app-movie-card>
+        </div>
+      </ng-container>
+    </div>
+  </main>
   <app-add-modal
     *ngIf="isModalVisible"
     (closeModal)="displayModal($event)"
+    (afterAddEvent)="setToastMessage($event)"
   ></app-add-modal>
 </div>

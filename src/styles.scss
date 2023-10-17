@@ -10,3 +10,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.success-bar {
+  color: white;
+  --mdc-snackbar-container-color: green !important;
+  --mat-snack-bar-button-color: black !important;
+}

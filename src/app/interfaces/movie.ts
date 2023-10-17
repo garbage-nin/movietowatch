@@ -1,12 +1,13 @@
 export interface Movie {
-  id?: number;
+  _id?: string;
   title: string;
-  actors: string[];
+  actors: string;
   genre: string[];
   rating: number;
   views: number;
   pinned: boolean;
   watched: boolean;
+  watchedDate: string;
   releaseDate: string;
-  imageFile: string;
+  imageFilename?: string;
 }
