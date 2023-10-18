@@ -11,8 +11,8 @@ export class MovieService {
   apiUrl = '/api/movies/';
   movie$ = new BehaviorSubject<Movie[]>([]);
 
-  getMovies(): Observable<Movie[]> {
-    this.httpClient.get<Movie[]>(this.apiUrl).subscribe(
+  getMovies(query: any = {}): Observable<Movie[]> {
+    this.httpClient.get<Movie[]>(this.apiUrl, { params: query }).subscribe(
       (movies) => {
         this.movie$.next(movies);
       },

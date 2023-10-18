@@ -1,8 +1,21 @@
 <mat-toolbar color="primary">
-  <div class="p-2 flex w-full">
+  <div class="p-2 flex items-center justify-between w-full">
+    <div class="flex items-center w-1/5">
+      <input
+        type="text"
+        placeholder="Search title"
+        class="w-full p-1 text-black rounded-md"
+        (blur)="filterMovies($event)"
+      />
+    </div>
     <!-- First div -->
-    <div class="flex text-center items-center justify-center ml-12 w-full">
-      <button mat-raised-button color="accent" class="flex items-center mx-3">
+    <div class="flex text-center items-center justify-center w-3/5">
+      <button
+        mat-raised-button
+        color="accent"
+        class="flex items-center mx-3"
+        (click)="sortMovies('views')"
+      >
         <mat-icon
           aria-hidden="false"
           aria-label="Example visibility icon"
@@ -11,7 +24,12 @@
         ></mat-icon>
         Most Viewed
       </button>
-      <button mat-raised-button color="accent" class="flex items-center mx-3">
+      <button
+        mat-raised-button
+        color="accent"
+        class="flex items-center mx-3"
+        (click)="sortMovies('rating')"
+      >
         <mat-icon
           aria-hidden="false"
           aria-label="Example star icon"
@@ -20,7 +38,12 @@
         ></mat-icon>
         Top Rated
       </button>
-      <button mat-raised-button color="accent" class="flex items-center mx-3">
+      <button
+        mat-raised-button
+        color="accent"
+        class="flex items-center mx-3"
+        (click)="sortMovies('releaseDate')"
+      >
         <mat-icon
           aria-hidden="false"
           aria-label="Example bolt icon"
@@ -32,7 +55,7 @@
     </div>
 
     <!-- Second div -->
-    <div class="flex items-center mr-5">
+    <div class="flex justify-end items-center mr-5 w-1/5">
       <button
         mat-mini-fab
         color="accent"
