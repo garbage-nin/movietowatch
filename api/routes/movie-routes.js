@@ -23,7 +23,17 @@ const upload = multer({ storage: storage });
 
 router.get("/", async (request, response) => {
   try {
-    const movies = await model.find({});
+    let sort = { pinned: -1 };
+    let query = {};
+    if (request.query.sort) {
+      newSort = JSON.parse(request.query.sort);
+      sort = { ...sort, ...newSort };
+    }
+
+    if (request.query.title) {
+      query.title = { $regex: new RegExp(request.query.title, "i") };
+    }
+    const movies = await model.find(query).sort(sort);
     response.json(movies);
   } catch (error) {
     response.status(500).json({ message: error.message });

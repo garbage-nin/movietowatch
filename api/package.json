@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run import-db && nodemon server.js",
-    "import-db": "mongoimport --drop --db=movietowatch --collection=movies --file=data/movies.json --jsonArray",
+    "import-db": "mongoimport --drop --db=movietowatch --collection=movies --file=data/movies.json --jsonArray || true",
     "export-db": "mongoexport --db=movietowatch --collection=movies --out=data/movies.json --jsonArray",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

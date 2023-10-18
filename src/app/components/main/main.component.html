@@ -4,7 +4,11 @@
       <span class="p-4 text-5xl text-sky-500 font-bolder">Movie Watchlist</span>
     </div>
   </div>
-  <app-navigation (showModal)="displayModal($event)"></app-navigation>
+  <app-navigation
+    (showModal)="displayModal($event)"
+    (sort)="sortMovies($event)"
+    (filter)="filterMovies($event)"
+  ></app-navigation>
   <main class="py-2 h-auto">
     <div class="flex flex-wrap">
       <ng-container *ngFor="let movie of movie$ | async">

@@ -12,7 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MainComponent implements OnInit {
   isModalVisible = false;
   movie$: Observable<Movie[]> = this.movieService.getMovies();
-
+  filter = {};
+  sort = {};
   constructor(
     private movieService: MovieService,
     public snackBar: MatSnackBar
@@ -26,6 +27,17 @@ export class MainComponent implements OnInit {
     }
 
     return location.origin + '/api/movies/image/' + imageFilename;
+  }
+
+  sortMovies(event: any) {
+    this.sort = event;
+    let query = { ...this.filter, ...this.sort };
+    this.movie$ = this.movieService.getMovies(query);
+  }
+
+  filterMovies(event: any) {
+    this.filter = event;
+    this.movie$ = this.movieService.getMovies(event);
   }
 
   displayModal(isVisible: boolean) {
