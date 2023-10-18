@@ -1,27 +1,32 @@
 # Movietowatch
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
+Project was created using MEAN stack (Mongodb, ExpressJs, Angularm Node
+A simple movie to watch app. Following features
+- Add your favorite movie to mongodb using nodejs/express js
+- Edit your current movie (you can unpin/pin the movie)
+- Upload/Get the image of your movie to the server
+- Sort and filter your movie
 
-## Development server
+## Deployment
+Requirements:
+- mongodb
+- angular cli
+- node
+  
+Frontend - angular
+  1. Fork then clone the repo to your local development.
+  2. On running the front end navigate to moviestowatch/ first install dependency using:
+     ``` npm install ```
+  3. Then execute on cli ``` ng serve ```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Backend & mongodb - Nodejs/expressjs/mongodb
+  1. Install mongodb on your local https://www.mongodb.com/docs/manual/installation/
+  2. Create a folder under moviestowatch/api named uploads ```mkdir uploads``` (this will hold your uploaded image)
+  3. Navigate to moviestowatch/api, then run ```npm install``` for dependencies.
+  4. Then execute on cli ```npm run start```
+     - "npm run start" executes the cli "mongoimport" which import the data from moviestowatch/data, you can delete this to just start without the testdata
+     - if you want to backup your mongodb data you can run ```npm run export-db```, so the next time you run the backend it will use your backupdata
+  
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## License
+This project is licensed under the MIT License.
