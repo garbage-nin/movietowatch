@@ -1,13 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/dist
+client/dist
 /tmp
 /out-tsc
 /bazel-out
 
 # Node
-/node_modules
+client/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -21,15 +21,15 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+/client/.vscode/*
+!/client/.vscode/settings.json
+!/client/.vscode/tasks.json
+!/client/.vscode/launch.json
+!/client/.vscode/extensions.json
+client/.history/*
 
 # Miscellaneous
-/.angular/cache
+client/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
@@ -41,7 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/api/node_modules
-/api/uploads
+api/node_modules
+api/uploads
 
 /uploads
