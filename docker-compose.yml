@@ -1,12 +1,14 @@
 version: "3"
 services:
   client:
+    container_name: movietowatch-client-container
     build:
       context: ./client
     ports:
       - 4200:80
 
   api:
+    container_name: movietowatch-api-container
     build:
       context: ./api
     links:
@@ -15,19 +17,21 @@ services:
       - 3000:3000
 
   database:
+    container_name: movietowatch-db-container
     image: mongo:6
     ports:
       - 27018:27017
 
-  # proxy:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.nginx
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - api
-  #   links:
-  #     - api
-  #     - client
-  #   restart: always
+  proxy:
+    container_name: movietowatch-proxy-container
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 80:80
+    depends_on:
+      - api
+    links:
+      - api
+      - client
+    restart: always
