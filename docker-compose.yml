@@ -1,0 +1,33 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - 4200:80
+
+  api:
+    build:
+      context: ./api
+    links:
+      - database
+    ports:
+      - 3000:3000
+
+  database:
+    image: mongo:6
+    ports:
+      - 27018:27017
+
+  # proxy:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.nginx
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - api
+  #   links:
+  #     - api
+  #     - client
+  #   restart: always
